@@ -1,0 +1,58 @@
+{
+  "wishes": [
+    {
+      "id": "1",
+      "counter": 15,
+      "date": "2024-04-20",
+      "title": "Enable SASSAFRAS consensus",
+      "author": "Alice",
+      "description": "Discussing the new consensus algorithm.",
+      "resource": "https://example.com"
+    },
+    {
+      "id": "2",
+      "counter": 30,
+      "date": "2024-03-09",
+      "title": "Heatwaves and Urban Planning",
+      "author": "Bob",
+      "description": "Exploring the impact of heatwaves on city planning.",
+      "resource": "https://example.com"
+    },
+    {
+      "id": "3",
+      "counter": 5,
+      "date": "2024-04-22",
+      "title": "Fresh Approaches to Renewable Energy",
+      "author": "Charlie",
+      "description": "Innovative technologies in sustainable energy.",
+      "resource": "https://example.com"
+    },
+    {
+      "id": "4",
+      "counter": 20,
+      "date": "2024-04-21",
+      "title": "AI in Healthcare",
+      "author": "Dana",
+      "description": "How AI is transforming patient care.",
+      "resource": "https://example.com"
+    },
+    {
+      "id": "5",
+      "counter": 50,
+      "date": "2024-03-18",
+      "title": "Top Technologies of 2023",
+      "author": "Eve",
+      "description": "Overview of breakthrough technologies this year.",
+      "resource": "https://example.com"
+    },
+    {
+      "id": "6",
+      "counter": 45,
+      "date": "2024-04-17",
+      "title": "Leadership in Times of Change",
+      "author": "Frank",
+      "description": "Strategies for effective leadership during transformations.",
+      "resource": "https://example.com"
+    }
+  ]
+}
