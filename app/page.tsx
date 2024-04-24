@@ -1,6 +1,8 @@
 import { title, subtitle } from "@/components/primitives";
 import Tabs from "@/components/wishlist/tabs";
 import { fetchWishes } from "@/lib/wishes";
+import { Button } from "@nextui-org/button";
+import { Link } from "@nextui-org/link";
 
 interface IProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -17,9 +19,14 @@ export default async function Home({ searchParams }: IProps) {
         <h2 className={subtitle({ class: "mt-4" })}>
           Suggest ideas for your favorite project to implement.
         </h2>
+        <Link className="mt-4" href="/new">
+          <Button color="primary">Create Wish</Button>
+        </Link>
       </div>
 
-      <Tabs wishes={wishes} />
+      <div className="mt-8 w-full">
+        <Tabs wishes={wishes} />
+      </div>
     </section>
   );
 }
