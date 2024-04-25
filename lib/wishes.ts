@@ -22,7 +22,11 @@ async function fetchData<T>(url: string, tag: string): Promise<T> {
 
 export async function fetchWishes(sort?: string): Promise<Wish[]> {
   try {
-    const url = new URL(process.env.URL + "/api/wishes");
+    let baseUrl = process.env.URL;
+    if (process.env.VERCEL_URL) {
+      baseUrl = `https://${process.env.VERCEL_URL}`;
+    }
+    const url = new URL("/api/wishes", baseUrl);
     if (sort) {
       url.searchParams.append("sort", sort);
     }
