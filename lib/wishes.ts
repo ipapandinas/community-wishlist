@@ -1,8 +1,11 @@
 import { Wish } from "@/types";
 
-async function fetchData<T>(url: string): Promise<T> {
+async function fetchData<T>(url: string, tag: string): Promise<T> {
   try {
-    const response = await fetch(url, { cache: "no-store" });
+    const response = await fetch(url, {
+      next: { tags: [tag] },
+      cache: "no-store",
+    });
 
     if (!response.ok) {
       throw new Error(`Failed to fetch data. Status: ${response.status}`);
@@ -23,7 +26,7 @@ export async function fetchWishes(sort?: string): Promise<Wish[]> {
     if (sort) {
       url.searchParams.append("sort", sort);
     }
-    const wishes = await fetchData<Wish[]>(url.toString());
+    const wishes = await fetchData<Wish[]>(url.toString(), "wishes");
     return wishes;
   } catch (error) {
     console.error("Error fetching wishes:", error);
@@ -41,21 +44,4 @@ export async function fetchNewWishes(): Promise<Wish[]> {
 
 export async function fetchTopWishes(): Promise<Wish[]> {
   return fetchWishes("top");
-}
-
-export async function handleVote(wishId: string, delta: number) {
-  const response = await fetch(`/api/wishes`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ id: wishId, delta }),
-  });
-
-  if (!response.ok) {
-    console.error("Error updating wish");
-  }
-
-  const result = await response.json();
-  console.log("Updated wish:", result);
 }

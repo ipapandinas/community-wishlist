@@ -1,10 +1,11 @@
 import "@/styles/globals.css";
+import clsx from "clsx";
+import { Toaster } from "sonner";
 import { Metadata, Viewport } from "next";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Providers } from "./providers";
 import { Link } from "@nextui-org/link";
-import clsx from "clsx";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -56,6 +57,7 @@ export default function RootLayout({
                 <p className="text-primary">NextUI</p>
               </Link>
             </footer>
+            <Toaster />
           </div>
         </Providers>
       </body>

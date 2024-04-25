@@ -1,8 +1,9 @@
+"use client";
+
 import { Button } from "@nextui-org/button";
-import { Skeleton } from "@nextui-org/skeleton";
 import { ThumbDown, ThumbUp } from "../icons";
 import { useEffect, useState } from "react";
-import { handleVote } from "@/lib/wishes";
+import { updateWishCounter } from "@/app/actions";
 
 enum VoteType {
   UP,
@@ -41,14 +42,10 @@ export default function Vote({ id, initialCounter }: IVoteProps) {
   const sign = counter > 0 ? "+" : "";
 
   const handleVoteChange = async (newVote: VoteType) => {
-    try {
-      const delta = calculateDelta(vote, newVote);
-      await handleVote(id, delta);
-      setCounter((prevCounter) => prevCounter + delta);
-      setVote((prevVote) => (prevVote === newVote ? null : newVote));
-    } catch (error) {
-      console.error("Error updating vote:", error);
-    }
+    const delta = calculateDelta(vote, newVote);
+    const newCounter = await updateWishCounter(id, delta);
+    if (newCounter !== undefined) setCounter(newCounter);
+    setVote((prevVote) => (prevVote === newVote ? null : newVote));
   };
 
   const handleUpVote = () => {
