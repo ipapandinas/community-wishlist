@@ -45,7 +45,6 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  console.log("POST request");
   try {
     const newWishData = await request.json();
     console.log(newWishData);
@@ -90,6 +89,42 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     return new Response("Failed to load or save data.", {
       status: 500,
+    });
+  }
+}
+
+export async function PATCH(request: NextRequest) {
+  try {
+    const requestJson = await request.json();
+    const { id, delta } = requestJson;
+
+    const filePath = "data/data.json";
+    const data = await loadData(filePath);
+
+    // Find the wish by ID and update its counter
+    const wishIndex = data.wishes.findIndex((wish) => wish.id === id);
+    if (wishIndex === -1) {
+      return new Response(JSON.stringify({ error: "Wish not found" }), {
+        status: 404,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    // Update the counter by the delta provided in the request
+    data.wishes[wishIndex].counter += delta;
+
+    // Save the updated data back to the JSON file
+    await saveData(filePath, data);
+
+    return new Response(JSON.stringify({ data: data.wishes[wishIndex] }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    console.error("Failed to update wish:", error);
+    return new Response(JSON.stringify({ error: "Failed to update wish" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
     });
   }
 }

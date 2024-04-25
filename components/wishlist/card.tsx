@@ -50,7 +50,7 @@ export default function Card({
         </div>
       </div>
       <div className="flex-none p-3">
-        <Vote voteId={id} initialCounter={counter} />
+        <Vote id={id} initialCounter={counter} />
       </div>
     </NuiCard>
   );

@@ -29,7 +29,7 @@
     },
     {
       "id": "4",
-      "counter": 20,
+      "counter": 21,
       "date": "2024-04-21",
       "title": "AI in Healthcare",
       "author": "Dana",
@@ -84,7 +84,7 @@
       "author": "",
       "description": "let's go",
       "resource": "",
-      "counter": 0,
+      "counter": -1,
       "date": "2024-04-24T16:05:50.971Z"
     }
   ]

@@ -2,6 +2,7 @@ import { Button } from "@nextui-org/button";
 import { Skeleton } from "@nextui-org/skeleton";
 import { ThumbDown, ThumbUp } from "../icons";
 import { useEffect, useState } from "react";
+import { handleVote } from "@/lib/wishes";
 
 enum VoteType {
   UP,
@@ -9,54 +10,72 @@ enum VoteType {
 }
 
 interface IVoteProps {
-  voteId: string;
+  id: string;
   initialCounter: number;
 }
 
-export default function Vote({ voteId, initialCounter }: IVoteProps) {
+const calculateDelta = (currentVote: VoteType | null, newVote: VoteType) => {
+  const isUpvote = newVote === VoteType.UP;
+  const isDownvote = newVote === VoteType.DOWN;
+  const noVote = currentVote === null;
+
+  let delta = 0;
+  if (noVote) {
+    delta = isUpvote ? 1 : -1;
+  } else if (currentVote === VoteType.UP && isDownvote) {
+    delta = -2; // Remove upvote and add downvote
+  } else if (currentVote === VoteType.DOWN && isUpvote) {
+    delta = 2; // Remove downvote and add upvote
+  } else {
+    // This condition is for toggling the same vote off
+    delta = isUpvote ? -1 : 1; // Toggle off
+  }
+  return delta;
+};
+
+export default function Vote({ id, initialCounter }: IVoteProps) {
   const [vote, setVote] = useState<VoteType | null>(null);
   const [counter, setCounter] = useState<number>(initialCounter);
   const [isLoading, setLoading] = useState(true);
 
   const sign = counter > 0 ? "+" : "";
 
-  const handleUpVote = () => {
-    if (vote === VoteType.UP) {
-      setVote(null);
-      setCounter(counter - 1);
-    } else {
-      setCounter(vote === VoteType.DOWN ? counter + 2 : counter + 1);
-      setVote(VoteType.UP);
+  const handleVoteChange = async (newVote: VoteType) => {
+    try {
+      const delta = calculateDelta(vote, newVote);
+      await handleVote(id, delta);
+      setCounter((prevCounter) => prevCounter + delta);
+      setVote((prevVote) => (prevVote === newVote ? null : newVote));
+    } catch (error) {
+      console.error("Error updating vote:", error);
     }
+  };
+
+  const handleUpVote = () => {
+    handleVoteChange(VoteType.UP);
   };
 
   const handleDownVote = () => {
-    if (vote === VoteType.DOWN) {
-      setVote(null);
-      setCounter(counter + 1);
-    } else {
-      setCounter(vote === VoteType.UP ? counter - 2 : counter - 1);
-      setVote(VoteType.DOWN);
-    }
+    handleVoteChange(VoteType.DOWN);
   };
 
-  // Initialize vote state from local storage based on the voteId
+  // Initialize vote state from local storage based on the id
   useEffect(() => {
-    const storedVote = localStorage.getItem(`voteState_${voteId}`);
+    const storedVote = localStorage.getItem(`voteState_${id}`);
     if (storedVote) {
       setVote(Number(storedVote));
     }
     setLoading(false);
-  }, [voteId]);
+  }, [id]);
 
   // Update local storage on vote state change
   useEffect(() => {
     if (vote !== null) {
-      localStorage.setItem(`voteState_${voteId}`, vote.toString());
+      localStorage.setItem(`voteState_${id}`, vote.toString());
     } else {
-      localStorage.removeItem(`voteState_${voteId}`);
+      localStorage.removeItem(`voteState_${id}`);
     }
-  }, [vote, voteId]);
+  }, [vote, id]);
 
   return (
     <div className="flex flex-col gap-1 items-center">
