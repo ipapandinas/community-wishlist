@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { title, subtitle } from "@/components/primitives";
 import Tabs from "@/components/wishlist/tabs";
 import { Button } from "@nextui-org/button";
@@ -22,7 +23,9 @@ export default function WishlistLayout({
       </section>
 
       <section className="mt-8 w-full flex flex-col gap-2 mx-auto">
-        <Tabs />
+        <Suspense>
+          <Tabs />
+        </Suspense>
         {children}
       </section>
     </>
