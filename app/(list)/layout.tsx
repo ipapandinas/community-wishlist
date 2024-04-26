@@ -11,7 +11,7 @@ export default function WishlistLayout({
 }) {
   return (
     <>
-      <section className="inline-block max-w-lg text-center justify-center mx-auto">
+      <section className="text-center mx-auto">
         <h1 className={title()}>Wish&nbsp;</h1>
         <h1 className={title({ color: "violet" })}>magic&nbsp;</h1>
         <h2 className={subtitle({ class: "mt-4" })}>

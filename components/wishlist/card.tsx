@@ -25,7 +25,7 @@ export default function Card({
       <div className="flex flex-col justify-between p-3 flex-grow">
         <div>
           <p className="text-md font-bold">{title}</p>
-          {description && <p className="line-clamp-2 mb-4">{description}</p>}
+          {description && <p className="line-clamp-2 my-4">{description}</p>}
         </div>
         <div className="mt-auto text-gray-500">
           {type && <Chip className="mr-2">{type}</Chip>}

@@ -16,6 +16,7 @@ export default function NewForm() {
       className="flex flex-col gap-4"
       action={(formData) =>
         toast.promise(createWish(formData), {
+          loading: "Creating wish...",
           success: "Wish successfully created!",
           error: (error) => error,
         })
@@ -59,7 +60,7 @@ export default function NewForm() {
         name="resource"
         label="Resource URL"
         placeholder="Any resource link?"
-        type="text"
+        type="url"
       />
       <div className="flex gap-2 justify-end">
         <Button type="submit" fullWidth color="primary" aria-disabled={pending}>

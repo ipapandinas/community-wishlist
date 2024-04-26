@@ -43,7 +43,7 @@ export default function RootLayout({
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
-            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow flex flex-col items-center">
+            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
               {children}
             </main>
             <footer className="w-full flex items-center justify-center py-3">
@@ -57,7 +57,14 @@ export default function RootLayout({
                 <p className="text-primary">Don Telmo</p>
               </Link>
             </footer>
-            <Toaster />
+            <Toaster toastOptions={{
+              classNames: {
+                error: 'bg-danger',
+                success: 'text-success',
+                warning: 'text-yellow-300',
+                info: 'bg-blue-400',
+              },
+            }} />
           </div>
         </Providers>
       </body>

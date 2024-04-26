@@ -1,25 +1,25 @@
 "use server";
 
-import { revalidatePath, revalidateTag } from "next/cache";
-import { object, string, assert, optional, enums } from "superstruct";
+import { revalidatePath } from "next/cache";
+import { object, string, assert, nullable, enums } from "superstruct";
 import db from "@/db";
 import { WISH_TYPES } from "@/data/const";
 
 const WishRequest = object({
   title: string(),
-  author: optional(string()),
-  description: optional(string()),
-  resource: optional(string()),
-  type: optional(enums(WISH_TYPES)),
+  author: nullable(string()),
+  description: nullable(string()),
+  resource: nullable(string()),
+  type: nullable(enums(WISH_TYPES)),
 });
 
 function validateFormData(formData: FormData) {
   const newData = {
     title: formData.get("title"),
-    author: formData.get("author"),
-    description: formData.get("description"),
-    resource: formData.get("resource"),
-    type: formData.get("type"),
+    author: formData.get("author") || null,
+    description: formData.get("description") || null,
+    resource: formData.get("resource") || null,
+    type: formData.get("type") || null,
   };
 
   assert(newData, WishRequest);
@@ -37,14 +37,7 @@ export async function createWish(formData: FormData) {
     revalidatePath("/", "page");
     return wish;
   } catch (error) {
-    console.error("Error creating a wish:", error);
-    const errorMessage =
-      error instanceof Error ? error.message : "Something went wrong";
-    return {
-      errors: {
-        _form: [errorMessage],
-      },
-    };
+    throw new Error(`Error creating a wish - ${error instanceof Error ? error.message : "Something went wrong"}`);
   }
 }
 
