@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import clsx from "clsx";
+import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "sonner";
 import { Metadata, Viewport } from "next";
 import { siteConfig } from "@/config/site";
@@ -38,7 +39,7 @@ export default function RootLayout({
       <body
         className={clsx(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
+          fontSans.variable
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
@@ -54,19 +55,22 @@ export default function RootLayout({
                 title="dontelmo's twitter"
               >
                 <span className="text-default-600">Created by</span>
-                <p className="text-primary">Don Telmo</p>
+                <p className="text-secondary">Don Telmo</p>
               </Link>
             </footer>
-            <Toaster toastOptions={{
-              classNames: {
-                error: 'bg-danger',
-                success: 'text-success',
-                warning: 'text-yellow-300',
-                info: 'bg-blue-400',
-              },
-            }} />
+            <Toaster
+              toastOptions={{
+                classNames: {
+                  error: "bg-danger",
+                  success: "text-success",
+                  warning: "text-yellow-300",
+                  info: "bg-blue-400",
+                },
+              }}
+            />
           </div>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );

@@ -79,7 +79,7 @@ export default function Vote({ id, initialCounter }: IVoteProps) {
       <Button
         disabled={isLoading}
         isIconOnly
-        color="danger"
+        color="secondary"
         aria-label="Vote Up"
         onClick={handleUpVote}
         variant={vote === VoteType.UP ? "solid" : "faded"}
@@ -93,7 +93,7 @@ export default function Vote({ id, initialCounter }: IVoteProps) {
       <Button
         disabled={isLoading}
         isIconOnly
-        color="danger"
+        color="secondary"
         aria-label="Vote Down"
         onClick={handleDownVote}
         variant={vote === VoteType.DOWN ? "solid" : "faded"}

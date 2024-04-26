@@ -34,7 +34,7 @@ export default function Card({
           {resource && (
             <>
               {" | "}
-              <Link isExternal showAnchorIcon href={resource}>
+              <Link isExternal showAnchorIcon href={resource} color="secondary">
                 source
               </Link>
             </>
