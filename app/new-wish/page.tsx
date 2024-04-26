@@ -8,7 +8,7 @@ import { BackArrow } from "@/components/icons";
 export default function New() {
   return (
     <>
-      <section className="max-w-96 flex flex-col items-start justify-center gap-4 py-8 mx-auto md:py-10">
+      <section className="max-w-96 flex flex-col items-start justify-center gap-4 pb-8 mx-auto md:py-10">
         <div className="flex flex-col gap-3">
           <Link href="/" title="Back to the Homepage">
             <Button startContent={<BackArrow />}>Back</Button>

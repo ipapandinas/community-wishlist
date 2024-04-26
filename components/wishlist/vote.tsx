@@ -41,11 +41,11 @@ export default function Vote({ id, initialCounter }: IVoteProps) {
 
   const sign = counter > 0 ? "+" : "";
 
-  const handleVoteChange = async (newVote: VoteType) => {
+  const handleVoteChange = (newVote: VoteType) => {
     const delta = calculateDelta(vote, newVote);
-    const newCounter = await updateWishCounter(id, delta);
-    if (newCounter !== undefined) setCounter(newCounter);
     setVote((prevVote) => (prevVote === newVote ? null : newVote));
+    setCounter((prevState) => prevState + delta);
+    updateWishCounter(id, delta);
   };
 
   const handleUpVote = () => {
