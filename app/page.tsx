@@ -28,9 +28,11 @@ export default async function Home({ searchParams }: IProps) {
 
       <div className="mt-8 w-full flex flex-col gap-2">
         <Tabs />
-        {wishes.map((wish) => (
-          <Card key={wish.id} {...wish} />
-        ))}
+        <div className="mt-2 flex flex-col gap-2">
+          {wishes.map((wish) => (
+            <Card key={wish.id} {...wish} />
+          ))}
+        </div>
       </div>
     </section>
   );

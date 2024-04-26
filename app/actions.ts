@@ -1,14 +1,16 @@
 "use server";
 
 import { revalidatePath, revalidateTag } from "next/cache";
-import { object, string, assert, optional } from "superstruct";
+import { object, string, assert, optional, enums } from "superstruct";
 import db from "@/db";
+import { WISH_TYPES } from "@/data/const";
 
 const WishRequest = object({
   title: string(),
   author: optional(string()),
   description: optional(string()),
   resource: optional(string()),
+  type: optional(enums(WISH_TYPES)),
 });
 
 function validateFormData(formData: FormData) {
@@ -17,6 +19,7 @@ function validateFormData(formData: FormData) {
     author: formData.get("author"),
     description: formData.get("description"),
     resource: formData.get("resource"),
+    type: formData.get("type"),
   };
 
   assert(newData, WishRequest);

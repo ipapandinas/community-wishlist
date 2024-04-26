@@ -22,6 +22,7 @@ export async function fetchAllWishes() {
       resource: true,
       counter: true,
       date: true,
+      type: true,
     },
   });
 }

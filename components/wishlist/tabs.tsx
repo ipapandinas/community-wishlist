@@ -22,6 +22,7 @@ export default function Tabs() {
   return (
     <div className="flex w-full flex-col">
       <NuiTabs
+        classNames={{ tabList: "mx-auto sm:mx-0" }}
         aria-label="Sorting"
         color="primary"
         variant="bordered"

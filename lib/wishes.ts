@@ -3,10 +3,9 @@ import {
   fetchNewWishes,
   fetchAllWishes,
 } from "@/db/queries/wishes";
-import { WishResponse } from "@/types";
 import { sortByHot } from "@/utils/data";
 
-export async function fetchWishes(sortBy?: string): Promise<WishResponse[]> {
+export async function fetchWishes(sortBy?: string) {
   try {
     switch (sortBy) {
       case "top":

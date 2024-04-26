@@ -13,8 +13,8 @@ export const formatDate = (date: Date, withSi = true): string => {
   const month = Math.floor(day / 30.44); // Approximation for months
   const year = Math.floor(day / 365.25); // Approximation for leap years
 
-  let value = sec;
-  let unit = "second";
+  let value = 1;
+  let unit = "min";
   const si = isPast ? "ago" : "";
 
   if (min > 0 && min < 60) {

@@ -4,13 +4,6 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
-export type WishRequest = {
-  author?: string;
-  description?: string;
-  resource?: string;
-  title: string;
-};
-
 export type WishResponse = {
   id: number;
   author: string | null;
@@ -19,6 +12,7 @@ export type WishResponse = {
   description: string | null;
   resource: string | null;
   title: string;
+  type: string | null;
 };
 
 export type CustomDataResponse<TData> = {

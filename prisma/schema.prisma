@@ -14,12 +14,6 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-enum WishType {
-  protocol
-  dapp
-  tool
-}
-
 model Wish {
   id          Int      @id @default(autoincrement())
   title       String
@@ -28,5 +22,5 @@ model Wish {
   resource    String?
   counter     Int      @default(0)
   date        DateTime @default(now())
-  type        WishType
+  type        String?
 }
