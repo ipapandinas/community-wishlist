@@ -20,9 +20,9 @@ export default function Tabs() {
   };
 
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex w-full flex-col sticky top-2 pt-4 bg-background-dark z-10">
       <NuiTabs
-        classNames={{ tabList: "mx-auto sm:mx-0" }}
+        classNames={{ tabList: "mx-auto sm:mx-0 !bg-black" }}
         aria-label="Sorting"
         color="primary"
         variant="bordered"
