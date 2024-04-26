@@ -10,8 +10,8 @@ export default async function List({ sortType }: IProps) {
 
   return (
     <div className="mt-2 flex flex-col gap-2">
-      {wishes.map((wish) => (
-        <Card key={wish.id} {...wish} />
+      {wishes.map((wish, idx) => (
+        <Card key={wish.id} idx={idx + 1} {...wish} />
       ))}
     </div>
   );

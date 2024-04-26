@@ -7,10 +7,13 @@ import { formatDate } from "@/utils/date";
 import Vote from "./vote";
 import { WishResponse } from "@/types";
 
-interface ICardProps extends WishResponse {}
+interface ICardProps extends WishResponse {
+  idx: number;
+}
 
 export default function Card({
   id,
+  idx,
   author,
   counter,
   date,
@@ -21,7 +24,7 @@ export default function Card({
 }: ICardProps) {
   return (
     <NuiCard className="w-full flex flex-row items-stretch">
-      <div className="flex-none p-3">{id}.</div>
+      <div className="flex-none p-3">{idx}.</div>
       <div className="flex flex-col justify-between p-3 flex-grow">
         <div>
           <p className="text-md font-bold">{title}</p>

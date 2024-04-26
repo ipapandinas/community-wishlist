@@ -47,7 +47,26 @@ export default function RootLayout({
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
               {children}
             </main>
-            <footer className="w-full flex items-center justify-center py-3">
+            <footer className="w-full flex flex-col items-center justify-center py-3 gap-2 mt-8">
+              <div className="flex items-center gap-4 text-current">
+                <Link
+                  className="text-neutral-500"
+                  isExternal
+                  href="https://docs.google.com/forms/d/1EzW205Ns9GL_mKrdlj_CcRYRSKvWwDonZAni4bUzilo"
+                  title="Feature request form"
+                >
+                  Request a feature
+                </Link>
+                -
+                <Link
+                  className="text-neutral-500"
+                  isExternal
+                  href="https://docs.google.com/forms/d/1dZrbYoGWfgdgOctBLliB1ATbS9UR-BlDRhfZbUv6Irs"
+                  title="Report bug form"
+                >
+                  Report a bug
+                </Link>
+              </div>
               <Link
                 isExternal
                 className="flex items-center gap-1 text-current"
