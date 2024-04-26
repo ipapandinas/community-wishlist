@@ -4,16 +4,9 @@ import { Card as NuiCard } from "@nextui-org/card";
 import { Link } from "@nextui-org/link";
 import { formatDate } from "@/utils/date";
 import Vote from "./vote";
+import { WishResponse } from "@/types";
 
-interface ICardProps {
-  id: string;
-  author?: string;
-  counter: number;
-  date: string;
-  description?: string;
-  resource?: string;
-  title: string;
-}
+interface ICardProps extends WishResponse {}
 
 export default function Card({
   id,

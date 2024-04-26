@@ -4,16 +4,6 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
-export type Wish = {
-  id: string;
-  author: string;
-  counter: number;
-  date: string;
-  description: string;
-  resource: string;
-  title: string;
-};
-
 export type WishRequest = {
   author?: string;
   description?: string;
@@ -22,12 +12,12 @@ export type WishRequest = {
 };
 
 export type WishResponse = {
-  id: string;
-  author?: string;
+  id: number;
+  author: string | null;
   counter: number;
-  date: string;
-  description?: string;
-  resource?: string;
+  date: Date;
+  description: string | null;
+  resource: string | null;
   title: string;
 };
 

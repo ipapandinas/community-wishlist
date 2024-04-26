@@ -1,8 +1,8 @@
 "use server";
 
-import { loadData, saveData } from "@/utils/data";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { object, string, assert, optional } from "superstruct";
+import db from "@/db";
 
 const WishRequest = object({
   title: string(),
@@ -26,44 +26,36 @@ function validateFormData(formData: FormData) {
 
 export async function createWish(formData: FormData) {
   try {
-    const newData = validateFormData(formData);
+    const data = validateFormData(formData);
+    const wish = await db.wish.create({
+      data,
+    });
 
-    const filePath = "data/data.json";
-    const data = await loadData(filePath);
-
-    const newWish = {
-      id: (data.wishes.length + 1).toString(),
-      counter: 0,
-      date: new Date().toISOString(),
-      ...newData,
-    };
-
-    data.wishes.push(newWish);
-    await saveData(filePath, data);
-
-    revalidateTag("wishes");
-    return newWish;
+    revalidatePath("/", "page");
+    return wish;
   } catch (error) {
     console.error("Error creating a wish:", error);
-    throw Error("Error creating a wish");
+    const errorMessage =
+      error instanceof Error ? error.message : "Something went wrong";
+    return {
+      errors: {
+        _form: [errorMessage],
+      },
+    };
   }
 }
 
-export async function updateWishCounter(wishId: string, delta: number) {
-  try {
-    const filePath = "data/data.json";
-    const data = await loadData(filePath);
+export async function updateWishCounter(id: number, delta: number) {
+  const updatedWish = await db.wish.update({
+    where: {
+      id,
+    },
+    data: {
+      counter: {
+        increment: delta,
+      },
+    },
+  });
 
-    const wishIndex = data.wishes.findIndex((wish) => wish.id === wishId);
-    if (wishIndex === -1) {
-      throw Error(`Wish ${wishId} not found`);
-    }
-
-    data.wishes[wishIndex].counter += delta;
-    await saveData(filePath, data);
-
-    return data.wishes[wishIndex].counter;
-  } catch (error) {
-    console.error("Error voting for a wish:", error);
-  }
+  return updatedWish.counter;
 }

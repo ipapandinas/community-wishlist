@@ -11,7 +11,7 @@ enum VoteType {
 }
 
 interface IVoteProps {
-  id: string;
+  id: number;
   initialCounter: number;
 }
 

@@ -2,15 +2,9 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Tabs as NuiTabs, Tab } from "@nextui-org/tabs";
-import Card from "./card";
 import { Chart, Fire, Stars } from "../icons";
-import { Wish } from "@/types";
 
-interface ITabsProps {
-  wishes: Wish[];
-}
-
-export default function Tabs({ wishes }: ITabsProps) {
+export default function Tabs() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -21,7 +15,8 @@ export default function Tabs({ wishes }: ITabsProps) {
     current.set("sort", value);
     const search = current.toString();
     const query = search ? `?${search}` : "";
-    router.push(`${pathname}${query}`);
+    router.replace(`${pathname}${query}`);
+    router.refresh();
   };
 
   return (
@@ -40,13 +35,7 @@ export default function Tabs({ wishes }: ITabsProps) {
               <span>Hot</span>
             </div>
           }
-        >
-          <div className="flex flex-col space-y-4">
-            {wishes.map((wish) => (
-              <Card key={wish.id} {...wish} />
-            ))}
-          </div>
-        </Tab>
+        />
         <Tab
           key="new"
           title={
@@ -55,13 +44,7 @@ export default function Tabs({ wishes }: ITabsProps) {
               <span>New</span>
             </div>
           }
-        >
-          <div className="flex flex-col space-y-4">
-            {wishes.map((wish) => (
-              <Card key={wish.id} {...wish} />
-            ))}
-          </div>
-        </Tab>
+        />
         <Tab
           key="top"
           title={
@@ -70,13 +53,7 @@ export default function Tabs({ wishes }: ITabsProps) {
               <span>Top</span>
             </div>
           }
-        >
-          <div className="flex flex-col space-y-4">
-            {wishes.map((wish) => (
-              <Card key={wish.id} {...wish} />
-            ))}
-          </div>
-        </Tab>
+        />
       </NuiTabs>
     </div>
   );
