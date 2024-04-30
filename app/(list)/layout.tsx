@@ -16,15 +16,15 @@ export default function WishlistLayout({
         <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
           <TernoaIcon className="w-80" width={40} height={40} />
           <h1 className="tracking-tight inline font-semibold text-[2.5rem] leading-tight lg:text-5xl">
-            Top{" "}
+            Community{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-b from-[#FF1CF7] to-[#b249f8]">
-              wishes
+              Apps wishes
             </span>
-            : Curated by the Ternoa Community and You
+            : Built by You, For You
           </h1>
           <h2 className={subtitle({ class: "mt-4" })}>
-            Imagine the possibilities with Ternoa. Suggest & Vote protocol
-            improvements or new apps to be build —{" "}
+            Imagine the possibilities with Ternoa. Propose, Vote & Collaborate
+            to Build new app ideas —{" "}
             <span className="underline">No account needed</span>, every feedback
             matters!
           </h2>

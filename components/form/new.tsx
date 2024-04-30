@@ -4,9 +4,9 @@ import { useFormStatus } from "react-dom";
 import { toast } from "sonner";
 import { createWish } from "@/app/actions";
 import { Button } from "@nextui-org/button";
-import { Select, SelectItem } from "@nextui-org/select";
+// import { Select, SelectItem } from "@nextui-org/select";
 import { Input, Textarea } from "@nextui-org/input";
-import { WISH_TYPES } from "@/data/const";
+// import { WISH_TYPES } from "@/data/const";
 
 export default function NewForm() {
   const { pending } = useFormStatus();
@@ -30,7 +30,7 @@ export default function NewForm() {
         placeholder="Your wish tagline"
         type="text"
       />
-      <Select
+      {/* <Select
         id="type"
         name="type"
         label="Wish Type"
@@ -41,7 +41,7 @@ export default function NewForm() {
             {type}
           </SelectItem>
         ))}
-      </Select>
+      </Select> */}
       <Textarea
         id="description"
         name="description"
@@ -52,7 +52,7 @@ export default function NewForm() {
         id="author"
         name="author"
         label="Username"
-        placeholder="Your username"
+        placeholder="Your Discord username"
         type="text"
       />
       <Input
